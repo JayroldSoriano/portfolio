@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayrold Soriano — Full-Stack Developer</title>
+<meta name="description" content="Full-stack developer in Metro Manila. FastAPI, React, Expo, Supabase, PostgreSQL, AWS. Builder of Beens, Graduhan, and Hirush.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F3F0;
+  --ink:#121317;
+  --cobalt:#2438FF;
+  --cobalt-tint:#E6E9FF;
+  --steel:#7C7F87;
+  --line:#D6D6D1;
+  --max:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Instrument Sans',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--cobalt);color:#fff}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+.mono{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper);
+  border-bottom:1px solid var(--ink);
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;padding:14px 24px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.nav-links{display:flex;gap:28px}
+.nav-links a{position:relative;padding:2px 0}
+.nav-links a:hover{color:var(--cobalt)}
+.nav-name{font-weight:700}
+
+/* ---------- hero ---------- */
+header{border-bottom:1px solid var(--ink)}
+.hero{
+  max-width:var(--max);margin:0 auto;padding:72px 24px 56px;
+}
+.hero .eyebrow{color:var(--cobalt);margin-bottom:20px;display:block}
+.hero h1{
+  font-family:'Archivo Black',sans-serif;
+  font-size:clamp(3rem,9.5vw,7.5rem);
+  line-height:.95;
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+}
+.hero h1 .outline{
+  color:transparent;
+  -webkit-text-stroke:2px var(--ink);
+}
+.hero-sub{
+  margin-top:36px;
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;
+  align-items:end;
+}
+.hero-sub p{max-width:46ch;font-size:1.05rem}
+.hero-meta{display:flex;flex-direction:column;gap:8px;align-items:flex-end;text-align:right}
+.hero-meta .mono{color:var(--steel)}
+.hero-meta .mono strong{color:var(--ink);font-weight:700}
+
+/* status strip */
+.strip{
+  border-top:1px solid var(--ink);
+  background:var(--ink);color:var(--paper);
+  overflow:hidden;white-space:nowrap;
+}
+.strip-inner{
+  display:inline-block;padding:10px 0;
+  animation:ticker 28s linear infinite;
+}
+.strip-inner span{margin:0 28px}
+.strip-inner b{color:#9AA4FF;font-weight:700}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .strip-inner{animation:none;padding-left:24px}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- section headers ---------- */
+section{padding:80px 0;border-bottom:1px solid var(--line)}
+.sec-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:48px;gap:16px;
+}
+.sec-head h2{
+  font-family:'Archivo Black',sans-serif;
+  font-size:clamp(1.6rem,3.5vw,2.4rem);
+  text-transform:uppercase;letter-spacing:-.01em;
+}
+.sec-head .mono{color:var(--steel)}
+
+/* ---------- work index (signature) ---------- */
+#work{padding-bottom:0;border-bottom:none}
+.project{
+  border-top:1px solid var(--ink);
+  transition:background .25s ease,color .25s ease;
+}
+.project:last-of-type{border-bottom:1px solid var(--ink)}
+.project summary{
+  list-style:none;cursor:pointer;
+  max-width:var(--max);margin:0 auto;padding:28px 24px;
+  display:grid;grid-template-columns:120px 1fr auto;gap:24px;align-items:center;
+}
+.project summary::-webkit-details-marker{display:none}
+.project .p-tag{color:var(--steel)}
+.project .p-title{
+  font-family:'Archivo Black',sans-serif;
+  font-size:clamp(1.9rem,5.5vw,4rem);
+  text-transform:uppercase;line-height:1;letter-spacing:-.01em;
+}
+.project .p-role{color:var(--steel);text-align:right}
+.project:hover,.project[open]{background:var(--cobalt);color:#fff}
+.project:hover .p-tag,.project:hover .p-role,
+.project[open] .p-tag,.project[open] .p-role{color:#C9CFFF}
+.project-body{
+  max-width:var(--max);margin:0 auto;
+  padding:0 24px 40px;
+  display:grid;grid-template-columns:120px 1fr 1fr;gap:24px;
+}
+.project-body .spacer{display:block}
+.project-body h3{font-size:1rem;font-weight:600;margin-bottom:10px;color:#C9CFFF}
+.project-body p,.project-body li{color:#EDEFFF;font-size:.98rem}
+.project-body ul{list-style:none}
+.project-body li{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.project-body li:last-child{border-bottom:none}
+.chips{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+.chips span{
+  font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.5);padding:4px 10px;border-radius:999px;color:#fff;
+}
+
+/* ---------- more builds ---------- */
+.builds{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.build{background:var(--paper);padding:32px;display:block}
+.build:hover{background:var(--cobalt-tint)}
+.build .mono{color:var(--cobalt)}
+.build .repo{display:inline-block;margin-top:14px;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid var(--cobalt);padding-bottom:2px;color:var(--cobalt)}
+.build h3{font-family:'Archivo Black',sans-serif;font-size:1.25rem;text-transform:uppercase;margin:10px 0 8px}
+.build p{font-size:.95rem;color:#3A3C42}
+
+/* ---------- stack ---------- */
+.stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.stack-col h3{font-size:.95rem;font-weight:600;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.stack-col ul{list-style:none}
+.stack-col li{padding:8px 0;border-bottom:1px solid var(--line);font-size:.98rem;display:flex;justify-content:space-between;gap:12px}
+.stack-col li .mono{color:var(--steel);font-size:.62rem;align-self:center}
+
+/* ---------- experience ---------- */
+.xp{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid var(--line)}
+.xp:last-child{border-bottom:none}
+.xp h3{font-size:1.15rem;font-weight:700}
+.xp .where{color:var(--cobalt);font-weight:600}
+.xp p{margin-top:8px;max-width:64ch;color:#3A3C42}
+
+/* ---------- contact ---------- */
+#contact{border-bottom:none;padding-bottom:0}
+.contact-inner{text-align:left}
+.contact-inner h2{
+  font-family:'Archivo Black',sans-serif;
+  font-size:clamp(2.4rem,7vw,5.5rem);
+  text-transform:uppercase;line-height:1;letter-spacing:-.015em;
+  margin-bottom:28px;
+}
+.contact-inner h2 span{color:var(--cobalt)}
+.cta{
+  display:inline-block;margin-top:8px;
+  font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:16px 28px;border:1px solid var(--ink);
+  transition:background .2s,color .2s;
+}
+.cta:hover{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+footer{
+  margin-top:72px;border-top:1px solid var(--ink);
+  padding:18px 24px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+footer .mono{color:var(--steel)}
+
+/* ---------- responsive ---------- */
+@media (max-width:820px){
+  .hero-sub{grid-template-columns:1fr}
+  .hero-meta{align-items:flex-start;text-align:left}
+  .project summary{grid-template-columns:1fr;gap:8px}
+  .project .p-role{text-align:left}
+  .project-body{grid-template-columns:1fr;padding-top:4px}
+  .project-body .spacer{display:none}
+  .builds{grid-template-columns:1fr}
+  .stack-grid{grid-template-columns:1fr;gap:32px}
+  .xp{grid-template-columns:1fr;gap:6px}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="nav-inner">
+    <a class="nav-name" href="#top">Jayrold Soriano</a>
+    <div class="nav-links mono">
+      <a href="#work">Work</a>
+      <a href="#builds">Builds</a>
+      <a href="#stack">Stack</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="hero">
+    <span class="eyebrow mono">Full-Stack Developer — Metro Manila, PH</span>
+    <h1>Jayrold<br><span class="outline">Soriano</span></h1>
+    <div class="hero-sub">
+      <p>I design and ship products end to end — API architecture, database schemas, mobile and web frontends, and the deployment pipeline in between. Currently building at Zenigan Studio and running my own ventures, including Graduhan by GradeFlow.</p>
+      <div class="hero-meta">
+        <span class="mono">Backend — <strong>FastAPI / Python</strong></span>
+        <span class="mono">Frontend — <strong>React / Expo / Ionic</strong></span>
+        <span class="mono">Data — <strong>PostgreSQL / Supabase / Redis</strong></span>
+        <span class="mono">Cloud — <strong>AWS</strong></span>
+      </div>
+    </div>
+  </div>
+  <div class="strip mono" aria-hidden="true">
+    <div class="strip-inner">
+      <span>Beens — <b>Social App</b></span><span>Graduhan — <b>EdTech SaaS</b></span><span>Hirush — <b>Marketplace</b></span><span>PickleEye — <b>Sports Tech / CV</b></span><span>Social Chair — <b>Venue Platform</b></span><span>Graduhan by GradeFlow — <b>Founder</b></span><span>Zenigan Studio — <b>Software Associate</b></span>
+      <span>Beens — <b>Social App</b></span><span>Graduhan — <b>EdTech SaaS</b></span><span>Hirush — <b>Marketplace</b></span><span>PickleEye — <b>Sports Tech / CV</b></span><span>Social Chair — <b>Venue Platform</b></span><span>Graduhan by GradeFlow — <b>Founder</b></span><span>Zenigan Studio — <b>Software Associate</b></span>
+    </div>
+  </div>
+</header>
+
+<section id="work" aria-label="Selected work">
+  <div class="wrap sec-head">
+    <h2>Selected Work</h2>
+    <span class="mono">Tap a project to expand</span>
+  </div>
+
+  <details class="project">
+    <summary>
+      <span class="p-tag mono">Social</span>
+      <span class="p-title">Beens</span>
+      <span class="p-role mono">Full-Stack · 3 Repos</span>
+    </summary>
+    <div class="project-body">
+      <span class="spacer"></span>
+      <div>
+        <h3>What it is</h3>
+        <p>A social connection app built around plans, bidding, attendance codes, and subscriptions — developed across a dedicated API, an Ionic React mobile app, and an admin panel.</p>
+        <div class="chips"><span>Bun</span><span>TypeScript</span><span>Ionic React</span><span>Docker</span><span>Datadog</span></div>
+      </div>
+      <div>
+        <h3>What I built</h3>
+        <ul>
+          <li>Cost-efficient email notification system using a read-state-aware burst-gating model, with a full implementation spec</li>
+          <li>12 transactional email templates across three visual style sets</li>
+          <li>User lifecycle engagement funnel with drop-off tracking and analytics planning for stakeholders</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details class="project">
+    <summary>
+      <span class="p-tag mono">EdTech</span>
+      <span class="p-title">Graduhan</span>
+      <span class="p-role mono">Founder · Tala Labs</span>
+    </summary>
+    <div class="project-body">
+      <span class="spacer"></span>
+      <div>
+        <h3>What it is</h3>
+        <p>A grade management SaaS for Philippine K–12 teachers, built for DepEd's real-world workflows — school forms, MAPEH composite subjects, and SF9 report card sync as the hero premium feature. One Expo codebase runs iOS, Android, and web, with a Gemini-powered OCR proxy for sheet capture. Freemium tiers from Libre to institutional.</p>
+        <div class="chips"><span>Expo RN</span><span>Supabase + RLS</span><span>Edge Functions (Deno)</span><span>Gemini OCR</span><span>React Query</span><span>Zustand</span></div>
+      </div>
+      <div>
+        <h3>What I built</h3>
+        <ul>
+          <li>Comprehensive grade submission workflow spec: DepEd school forms, PostgreSQL schema with Supabase row-level security, five-phase implementation plan</li>
+          <li>Web app in Next.js + Supabase, Android-first mobile app in Expo React Native</li>
+          <li>Go-to-market strategy targeting teacher communities, plus full deployment documentation</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details class="project">
+    <summary>
+      <span class="p-tag mono">Marketplace</span>
+      <span class="p-title">Hirush</span>
+      <span class="p-role mono">Backend Architecture</span>
+    </summary>
+    <div class="project-body">
+      <span class="spacer"></span>
+      <div>
+        <h3>What it is</h3>
+        <p>A freelance marketplace platform serving three roles — client, freelancer, and admin — with a four-state earnings pipeline and a credit system (RushPoints) for job applications.</p>
+        <div class="chips"><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>AWS</span><span>Twilio</span><span>Claude API</span></div>
+      </div>
+      <div>
+        <h3>What I built</h3>
+        <ul>
+          <li>ABAC/RBAC access control architecture with a full migration guide</li>
+          <li>AI-powered job post drafting via the Claude API</li>
+          <li>Messaging backend spec, OTP verification integration, and time-tracking architecture coupled to the payments pipeline</li>
+          <li>Admin dashboard scope framework for client-facing sprint reviews</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details class="project">
+    <summary>
+      <span class="p-tag mono">Sports Tech</span>
+      <span class="p-title">PickleEye</span>
+      <span class="p-role mono">Founder · CV + Edge · 8 Repos</span>
+    </summary>
+    <div class="project-body">
+      <span class="spacer"></span>
+      <div>
+        <h3>What it is</h3>
+        <p>Courtside auto-replay for pickleball courts, starting in Metro Manila. A fixed camera records every session, software automatically detects and cuts a clip per rally, and players scan a QR code at the court to watch, download, and share their best points — no app install.</p>
+        <div class="chips"><span>Python</span><span>YOLO</span><span>RTSP</span><span>Intel N100 Edge</span><span>Cloudflare R2</span><span>Tailscale</span><span>Ansible</span></div>
+      </div>
+      <div>
+        <h3>What I built</h3>
+        <ul>
+          <li>Edge pipeline (detector → clipper → publisher) refactored into pure cores + IO, unit-tested, linted, and proven end-to-end offline</li>
+          <li>Rally detection with YOLO + motion-based ball tracking and rally segmentation, with a ranked-highlights CLI and local web UI</li>
+          <li>Continuous segmented RTSP recording with browser live-view</li>
+          <li>Player-facing viewer served statically from R2, operator admin console over Tailscale, and Ansible golden-image fleet provisioning</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details class="project">
+    <summary>
+      <span class="p-tag mono">Platform</span>
+      <span class="p-title">Social Chair</span>
+      <span class="p-role mono">Full-Stack · 5 Repos</span>
+    </summary>
+    <div class="project-body">
+      <span class="spacer"></span>
+      <div>
+        <h3>What it is</h3>
+        <p>A venue booking and social platform spanning a FastAPI backend, native iOS (Swift), Android, a web portal, and a Kotlin Multiplatform shared module that carries the API client and business logic across both mobile apps.</p>
+        <div class="chips"><span>FastAPI</span><span>Swift</span><span>Kotlin Multiplatform</span><span>TypeScript</span></div>
+      </div>
+      <div>
+        <h3>What I built</h3>
+        <ul>
+          <li>REST backend covering authentication, venue management, bookings, user management, and search</li>
+          <li>Shared KMP module with 116 passing tests and ~87% coverage, enabling code sharing with native UIs on both platforms</li>
+          <li>Web portal and cross-platform coordination across the five-repo system</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section id="builds">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>More Builds</h2>
+      <span class="mono">Experiments &amp; client work</span>
+    </div>
+    <div class="builds">
+      <div class="build">
+        <span class="mono">Open Source / Privacy Tooling</span>
+        <h3>macshift</h3>
+        <p>A privacy-first MAC address rotator for Linux and macOS, MIT-licensed. Randomized rotation intervals (because a fixed cadence is itself a fingerprint), a live terminal dashboard, and a <code>doctor</code> mode that runs a real spoof-then-restore probe to verify the machine can actually rotate before you trust it.</p>
+        <a class="repo" href="https://github.com/JayroldSoriano/MacShift" target="_blank" rel="noopener">github/MacShift →</a>
+      </div>
+      <div class="build">
+        <span class="mono">Web / Client Work</span>
+        <h3>Arcway Nexus</h3>
+        <p>A Next.js 14 landing page built with TypeScript, Zustand, and Supabase, structured on the MVVM pattern for clean separation between views, state, and services — with Zod-validated forms and Tailwind styling.</p>
+        <a class="repo" href="https://github.com/JayroldSoriano/Arcway-Nexus-Landing-Page" target="_blank" rel="noopener">github/Arcway-Nexus →</a>
+      </div>
+      <div class="build">
+        <span class="mono">Mobile / Cross-Platform</span>
+        <h3>Automation Dashboard</h3>
+        <p>A React Native app built with Expo for managing automation tasks and workflows — bottom-tab navigation, consistent theming, and a single codebase running on iOS, Android, and web.</p>
+        <a class="repo" href="https://github.com/JayroldSoriano/Automation-Dashboard" target="_blank" rel="noopener">github/Automation-Dashboard →</a>
+      </div>
+      <div class="build">
+        <span class="mono">Mobile / Offline-First</span>
+        <h3>Carwash CRM</h3>
+        <p>An offline-first mobile app for Philippine carwash businesses — customer CRUD, batch SMS blasting, and multi-device sync via a 6-digit business code. Firebase Firestore, Expo, NativeWind.</p>
+        <a class="repo" href="https://github.com/JayroldSoriano/carwashApp" target="_blank" rel="noopener">github/carwashApp →</a>
+      </div>
+      <div class="build">
+        <span class="mono">Microservices / Studio Work</span>
+        <h3>Blume Platform</h3>
+        <p>A multi-service platform built at studio scale: Python/FastAPI microservices for auth, planner, gifting, user profiles, and search — including a shared middleware package (auth verification, JWT-aware OpenAPI) installed across services — alongside SwiftUI iOS and Android clients.</p>
+      </div>
+      <div class="build">
+        <span class="mono">Admin / Fintech</span>
+        <h3>StreamNation PH</h3>
+        <p>Platform work spanning a Next.js 16 admin panel (RBAC, invites, departments, and finance workflows with shadcn/ui, TanStack Query, and Zod) and Fina, a production React Native Expo app for financial management and networking on Supabase.</p>
+      </div>
+      <div class="build">
+        <span class="mono">Project Management</span>
+        <h3>ArcSynapse</h3>
+        <p>A Jira-style project management system: Node.js/Express/TypeScript REST API with TypeORM and JWT auth — projects, issue tracking with relationships, comments — paired with a React frontend.</p>
+      </div>
+      <div class="build">
+        <span class="mono">Automation / AI</span>
+        <h3>Airbnb Ops Agent</h3>
+        <p>A four-workflow n8n automation for property management: Google Calendar integration, AI event classification, and a conversational availability query agent.</p>
+      </div>
+      <div class="build">
+        <span class="mono">Fintech / Research</span>
+        <h3>Futures Trading Bot</h3>
+        <p>Experimental Python trading system on the Binance API — EMA crossover and Bollinger Band mean-reversion strategies with backtesting scripts and risk-based position sizing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Stack</h2>
+      <span class="mono">Tools I ship with</span>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-col">
+        <h3>Backend &amp; Data</h3>
+        <ul>
+          <li>Python / FastAPI <span class="mono">Primary</span></li>
+          <li>Node.js / Express · Bun</li>
+          <li>PostgreSQL <span class="mono">Primary</span></li>
+          <li>Supabase + RLS · Edge Functions</li>
+          <li>Redis · Firebase Firestore</li>
+          <li>Microservices · ABAC / RBAC · JWT</li>
+          <li>Computer vision (YOLO) · RTSP pipelines</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h3>Frontend &amp; Mobile</h3>
+        <ul>
+          <li>React / Next.js <span class="mono">Primary</span></li>
+          <li>TypeScript</li>
+          <li>Expo (React Native)</li>
+          <li>Ionic React · Kotlin Multiplatform</li>
+          <li>Zustand · TanStack Query · Zod</li>
+          <li>NativeWind / Tailwind · shadcn/ui</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h3>Cloud, Edge &amp; Workflow</h3>
+        <ul>
+          <li>AWS · Cloudflare R2</li>
+          <li>Docker · Ansible · Tailscale</li>
+          <li>Datadog observability</li>
+          <li>Claude Code / agent-driven specs <span class="mono">Daily</span></li>
+          <li>Gemini API · MCP integrations · n8n</li>
+          <li>Twilio · RevenueCat · AdMob</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <span class="mono">Where I work</span>
+    </div>
+    <div class="xp">
+      <div>
+        <span class="mono" style="color:var(--steel)">Current</span>
+      </div>
+      <div>
+        <h3>Software Associate — <span class="where">Zenigan Studio</span></h3>
+        <p>Client-facing software delivery: full-stack development on the Beens platform, professional client documentation, and project proposals for external engagements.</p>
+      </div>
+    </div>
+    <div class="xp">
+      <div>
+        <span class="mono" style="color:var(--steel)">Current</span>
+      </div>
+      <div>
+        <h3>Founder — <span class="where">Graduhan by GradeFlow</span></h3>
+        <p>My own EdTech venture: a grade management SaaS for Philippine DepEd teachers at graduhan.co, taken from spec to a cross-platform product — one Expo codebase for iOS, Android, and web on a Supabase backend.</p>
+      </div>
+    </div>
+    <div class="xp">
+      <div>
+        <span class="mono" style="color:var(--steel)">Current · Pre-pilot</span>
+      </div>
+      <div>
+        <h3>Founder — <span class="where">PickleEye</span></h3>
+        <p>Courtside auto-replay for pickleball courts: computer vision, edge hardware, and fleet infrastructure, from business plan to working end-to-end pipeline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-inner">
+    <h2>Let's build<br><span>something.</span></h2>
+    <p style="max-width:52ch;margin-bottom:24px">Open to full-stack roles, contract work, and product collaborations. The fastest way to reach me is through GitHub.</p>
+    <a class="cta" href="https://github.com/JayroldSoriano" target="_blank" rel="noopener">GitHub → JayroldSoriano</a>
+  </div>
+  <footer>
+    <span class="mono">© 2026 Jayrold Soriano</span>
+    <span class="mono">Metro Manila, Philippines</span>
+  </footer>
+</section>
+
+</body>
+</html>
