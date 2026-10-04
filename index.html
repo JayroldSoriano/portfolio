@@ -159,6 +159,11 @@ section{padding:80px 0;border-bottom:1px solid var(--line)}
   border:1px solid rgba(255,255,255,.5);padding:4px 10px;border-radius:999px;color:#fff;
 }
 
+/* ---------- project demos ---------- */
+.project-demo{grid-column:2 / -1;margin:0 0 8px}
+.project-demo__video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--ink);border:1px solid rgba(255,255,255,.5);border-radius:6px}
+.project-demo__caption{margin-top:10px;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#C9CFFF}
+
 /* ---------- more builds ---------- */
 .builds{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .build{background:var(--paper);padding:32px;display:block}
@@ -214,6 +219,7 @@ footer .mono{color:var(--steel)}
   .project .p-role{text-align:left}
   .project-body{grid-template-columns:1fr;padding-top:4px}
   .project-body .spacer{display:none}
+  .project-demo{grid-column:auto}
   .builds{grid-template-columns:1fr}
   .stack-grid{grid-template-columns:1fr;gap:32px}
   .xp{grid-template-columns:1fr;gap:6px}
@@ -272,6 +278,15 @@ footer .mono{color:var(--steel)}
       <span class="p-role mono">Full-Stack · 3 Repos</span>
     </summary>
     <div class="project-body">
+      <figure class="project-demo">
+        <video class="project-demo__video" muted loop playsinline preload="none"
+               poster="assets/demos/social-platform-poster.jpg"
+               aria-label="Social Platform demo: read-state-aware notification gating, transactional email templates and a lifecycle funnel">
+          <source src="assets/demos/social-platform.webm" type="video/webm">
+          <source src="assets/demos/social-platform.mp4" type="video/mp4">
+        </video>
+        <figcaption class="project-demo__caption">Notification system design · Client name withheld per NDA · illustrative UI</figcaption>
+      </figure>
       <span class="spacer"></span>
       <div>
         <h3>What it is</h3>
@@ -296,6 +311,15 @@ footer .mono{color:var(--steel)}
       <span class="p-role mono">Founder · Tala Labs</span>
     </summary>
     <div class="project-body">
+      <figure class="project-demo">
+        <video class="project-demo__video" muted loop playsinline preload="none"
+               poster="assets/demos/graduhan-poster.jpg"
+               aria-label="Graduhan demo: encoding grades, auto-computed grade summary and one-tap DepEd ECR export on phone and web">
+          <source src="assets/demos/graduhan.webm" type="video/webm">
+          <source src="assets/demos/graduhan.mp4" type="video/mp4">
+        </video>
+        <figcaption class="project-demo__caption">Real app · demo data with fictional learners</figcaption>
+      </figure>
       <span class="spacer"></span>
       <div>
         <h3>What it is</h3>
@@ -320,6 +344,15 @@ footer .mono{color:var(--steel)}
       <span class="p-role mono">Backend Architecture</span>
     </summary>
     <div class="project-body">
+      <figure class="project-demo">
+        <video class="project-demo__video" muted loop playsinline preload="none"
+               poster="assets/demos/marketplace-poster.jpg"
+               aria-label="Marketplace demo: ABAC and RBAC access control, a four-state earnings pipeline and AI job drafting">
+          <source src="assets/demos/marketplace.webm" type="video/webm">
+          <source src="assets/demos/marketplace.mp4" type="video/mp4">
+        </video>
+        <figcaption class="project-demo__caption">Backend architecture · Client name withheld per NDA · illustrative UI</figcaption>
+      </figure>
       <span class="spacer"></span>
       <div>
         <h3>What it is</h3>
@@ -345,6 +378,15 @@ footer .mono{color:var(--steel)}
       <span class="p-role mono">Founder · CV + Edge · 8 Repos</span>
     </summary>
     <div class="project-body">
+      <figure class="project-demo">
+        <video class="project-demo__video" muted loop playsinline preload="none"
+               poster="assets/demos/pickleeye-poster.jpg"
+               aria-label="PickleEye demo: court camera, auto-detected rally, QR code and the no-install player viewer">
+          <source src="assets/demos/pickleeye.webm" type="video/webm">
+          <source src="assets/demos/pickleeye.mp4" type="video/mp4">
+        </video>
+        <figcaption class="project-demo__caption">Real court footage, blurred for privacy · illustrative detection overlay</figcaption>
+      </figure>
       <span class="spacer"></span>
       <div>
         <h3>What it is</h3>
@@ -370,6 +412,15 @@ footer .mono{color:var(--steel)}
       <span class="p-role mono">Full-Stack · 5 Repos</span>
     </summary>
     <div class="project-body">
+      <figure class="project-demo">
+        <video class="project-demo__video" muted loop playsinline preload="none"
+               poster="assets/demos/venue-booking-poster.jpg"
+               aria-label="Venue Booking demo: native iOS and Android sharing one Kotlin Multiplatform core, tests and the FastAPI backend">
+          <source src="assets/demos/venue-booking.webm" type="video/webm">
+          <source src="assets/demos/venue-booking.mp4" type="video/mp4">
+        </video>
+        <figcaption class="project-demo__caption">Shared KMP core · Client name withheld per NDA · illustrative UI</figcaption>
+      </figure>
       <span class="spacer"></span>
       <div>
         <h3>What it is</h3>
@@ -597,6 +648,26 @@ footer .mono{color:var(--steel)}
     <span class="mono">Metro Manila, Philippines</span>
   </footer>
 </section>
+
+<script>
+/* Project demos: play only while visible (closed rows report not intersecting),
+   pause when scrolled away; reduced motion keeps the poster and offers controls. */
+(() => {
+  const videos = document.querySelectorAll('.project-demo__video');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const io = new IntersectionObserver((entries) => {
+    for (const { target: v, isIntersecting } of entries) {
+      if (isIntersecting && !reduce.matches) v.play().catch(() => {});
+      else v.pause();
+    }
+  }, { threshold: 0.25 });
+  const applyMotion = () => videos.forEach((v) => { v.controls = reduce.matches; if (reduce.matches) v.pause(); });
+  videos.forEach((v) => { v.muted = true; io.observe(v); });
+  applyMotion();
+  reduce.addEventListener('change', applyMotion);
+})();
+</script>
 
 </body>
 </html>
