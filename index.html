@@ -280,10 +280,10 @@ footer .mono{color:var(--steel)}
     <div class="project-body">
       <figure class="project-demo">
         <video class="project-demo__video" muted loop playsinline preload="none"
-               poster="assets/demos/social-platform-poster.jpg"
+               poster="assets/demos/social-platform-poster.jpg?v=2"
                aria-label="Social Platform walkthrough: create a plan, people bid to join, check in with a code, and get one tidy update">
-          <source src="assets/demos/social-platform.webm" type="video/webm">
-          <source src="assets/demos/social-platform.mp4" type="video/mp4">
+          <source src="assets/demos/social-platform.webm?v=2" type="video/webm">
+          <source src="assets/demos/social-platform.mp4?v=2" type="video/mp4">
         </video>
         <figcaption class="project-demo__caption">App walkthrough · Client name withheld per NDA · illustrative UI</figcaption>
       </figure>
@@ -313,10 +313,10 @@ footer .mono{color:var(--steel)}
     <div class="project-body">
       <figure class="project-demo">
         <video class="project-demo__video" muted loop playsinline preload="none"
-               poster="assets/demos/graduhan-poster.jpg"
+               poster="assets/demos/graduhan-poster.jpg?v=2"
                aria-label="Graduhan walkthrough: type a score and tap the student, grades compute themselves, and the official class record is ready in one tap, on phone or computer">
-          <source src="assets/demos/graduhan.webm" type="video/webm">
-          <source src="assets/demos/graduhan.mp4" type="video/mp4">
+          <source src="assets/demos/graduhan.webm?v=2" type="video/webm">
+          <source src="assets/demos/graduhan.mp4?v=2" type="video/mp4">
         </video>
         <figcaption class="project-demo__caption">App walkthrough · real app, fictional students</figcaption>
       </figure>
@@ -346,10 +346,10 @@ footer .mono{color:var(--steel)}
     <div class="project-body">
       <figure class="project-demo">
         <video class="project-demo__video" muted loop playsinline preload="none"
-               poster="assets/demos/marketplace-poster.jpg"
+               poster="assets/demos/marketplace-poster.jpg?v=2"
                aria-label="Marketplace walkthrough: describe a job and AI writes the post, freelancers apply with credits, chat and track hours, and get paid">
-          <source src="assets/demos/marketplace.webm" type="video/webm">
-          <source src="assets/demos/marketplace.mp4" type="video/mp4">
+          <source src="assets/demos/marketplace.webm?v=2" type="video/webm">
+          <source src="assets/demos/marketplace.mp4?v=2" type="video/mp4">
         </video>
         <figcaption class="project-demo__caption">App walkthrough · Client name withheld per NDA · illustrative UI</figcaption>
       </figure>
@@ -380,10 +380,10 @@ footer .mono{color:var(--steel)}
     <div class="project-body">
       <figure class="project-demo">
         <video class="project-demo__video" muted loop playsinline preload="none"
-               poster="assets/demos/pickleeye-poster.jpg"
+               poster="assets/demos/pickleeye-poster.jpg?v=2"
                aria-label="PickleEye walkthrough: play while the court camera saves every rally, scan the court code, then watch, download and share on your phone">
-          <source src="assets/demos/pickleeye.webm" type="video/webm">
-          <source src="assets/demos/pickleeye.mp4" type="video/mp4">
+          <source src="assets/demos/pickleeye.webm?v=2" type="video/webm">
+          <source src="assets/demos/pickleeye.mp4?v=2" type="video/mp4">
         </video>
         <figcaption class="project-demo__caption">App walkthrough · real court footage, blurred for privacy</figcaption>
       </figure>
@@ -414,10 +414,10 @@ footer .mono{color:var(--steel)}
     <div class="project-body">
       <figure class="project-demo">
         <video class="project-demo__video" muted loop playsinline preload="none"
-               poster="assets/demos/venue-booking-poster.jpg"
+               poster="assets/demos/venue-booking-poster.jpg?v=2"
                aria-label="Venue Booking walkthrough: search for a venue, pick a date and time, confirm the booking, on iPhone, Android and the web">
-          <source src="assets/demos/venue-booking.webm" type="video/webm">
-          <source src="assets/demos/venue-booking.mp4" type="video/mp4">
+          <source src="assets/demos/venue-booking.webm?v=2" type="video/webm">
+          <source src="assets/demos/venue-booking.mp4?v=2" type="video/mp4">
         </video>
         <figcaption class="project-demo__caption">App walkthrough · Client name withheld per NDA · illustrative UI</figcaption>
       </figure>
@@ -663,7 +663,15 @@ footer .mono{color:var(--steel)}
     }
   }, { threshold: 0.25 });
   const applyMotion = () => videos.forEach((v) => { v.controls = reduce.matches; if (reduce.matches) v.pause(); });
-  videos.forEach((v) => { v.muted = true; io.observe(v); });
+  videos.forEach((v) => {
+    v.muted = true;
+    io.observe(v);
+    // If the WebM fails to decode, fall back to the MP4 source.
+    v.addEventListener('error', () => {
+      const mp4 = v.querySelector('source[type="video/mp4"]');
+      if (mp4 && !v.currentSrc.includes('.mp4')) { v.src = mp4.src; if (!reduce.matches) v.play().catch(() => {}); }
+    });
+  });
   applyMotion();
   reduce.addEventListener('change', applyMotion);
 })();
